@@ -11,6 +11,7 @@ const ListWrapper = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin: 20px;
+	flex-wrap: wrap;
 
 `;
 
