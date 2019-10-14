@@ -25,6 +25,17 @@ it('Player tests', () => {
 	// display the app for a visual inspection
 	console.log(wrapper.debug());
 
+	// displays player name?
+	const name = wrapper.queryByText(/player one/i);
+	expect(name).toBeVisible();
+
+	// displays country?
+	const country = wrapper.queryByText(/united states/i);
+	expect(country).toBeVisible();
+
+	// displays searches?
+	const searches = wrapper.queryByText(/searches: 10/i);
+	expect(searches).toBeVisible();
 
 
 });

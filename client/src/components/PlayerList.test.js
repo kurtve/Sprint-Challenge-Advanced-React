@@ -32,6 +32,20 @@ it('PlayerList tests', () => {
 	console.log(wrapper.debug());
 
 
+	// back and forward paging buttons display?
+	const back = wrapper.queryByText(/back/i);
+	expect(back).toBeVisible();
+
+	const next = wrapper.queryByText(/next/i);
+	expect(next).toBeVisible();
+
+
+	// displays two separate players?
+	const p_one = wrapper.queryByText(/player one/i);
+	expect(p_one).toBeVisible();
+
+	const p_two = wrapper.queryByText(/player two/i);
+	expect(p_two).toBeVisible();
 
 });
 

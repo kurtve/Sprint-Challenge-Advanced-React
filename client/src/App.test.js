@@ -17,9 +17,16 @@ it('App tests', () => {
 	console.log(wrapper.debug());
 
 
+	// header title displays?
+	const heading = wrapper.queryByText(/women\'s world cup/i);
+	expect(heading).toBeVisible();
 
+	// back and forward paging buttons display?
+	const back = wrapper.queryByText(/back/i);
+	expect(back).toBeVisible();
 
+	const next = wrapper.queryByText(/next/i);
+	expect(next).toBeVisible();
 
 });
-
 
