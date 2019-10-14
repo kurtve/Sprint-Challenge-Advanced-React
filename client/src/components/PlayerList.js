@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Player from './Player';
-
+import { usePaging } from './usePaging';
 
 
 const ButtonWrapper = styled.div`
@@ -40,18 +40,28 @@ const ListWrapper = styled.div`
 `;
 
 
-
-
 const PlayerList = (props) => {
+
+	const pageSize = 12;  // number of cards to display per page
+	const maxPage = Math.ceil(props.players.length / pageSize);  // total number of pages
+
+	const [page, setPage] = useState(1);        // pages start at 1
+	const [subset, setSubset] = useState([]);
 
 
 	const goBack = () => {
-		console.log('go back 1 page');
+		setPage(Math.max(1, page - 1));
 	};
 
 	const goForward = () => {
-		console.log('go forward 1 page');
+		setPage(Math.min(maxPage, page + 1));
 	}
+
+
+	// custom hook to page through an array of items
+	// Parameters: list, set-subset-function, pageNumber, pageSize
+	// whenever 'page' changes, the hook will fetch the appropiate subarray
+	usePaging(props.players, setSubset, page, 12);
 
 
 	return (
@@ -61,7 +71,7 @@ const PlayerList = (props) => {
 				<button onClick={goForward} className='next'>Next</button>
 			</ButtonWrapper>
 			<ListWrapper>
-				{props.players.map(player => <Player key={player.id} player={player} /> )}
+				{subset.map(player => <Player key={player.id} player={player} /> )}
 			</ListWrapper>
 		</>
 	);
