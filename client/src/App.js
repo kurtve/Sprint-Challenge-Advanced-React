@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import PlayerList from './components/PlayerList';
-
+import { getApi } from './components/getApi';
 
 
 const AppWrapper = styled.div`
@@ -24,24 +24,20 @@ class App extends Component {
 		super();
 
 		this.state = {
-			players: [
-				{
-					"name": "Alex Morgan",
-					"country": "United States",
-					"searches": 100,
-					"id": 0
-				},
-				{
-					"name": "Megan Rapinoe",
-					"country": "United States",
-					"searches": 99,
-					"id": 1
-				}
-			]
+			players: []
 		};
 
 	}
 
+
+	updatePlayers = (data) => {
+		this.setState({ players: data });
+	};
+
+
+	componentDidMount() {
+		getApi('http://localhost:5000/api/players', this.updatePlayers);
+	}
 
 
 	render() {
